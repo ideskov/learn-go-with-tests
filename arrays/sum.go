@@ -1,11 +1,10 @@
 package arrays
 
-func Sum(numbers []int) int {
-	sum := 0
+func Sum(numbers []int) (sum int) {
 	for _, number := range numbers {
 		sum += number
 	}
-	return sum
+	return
 }
 
 func SumAll(slices ...[]int) (sums []int) {
