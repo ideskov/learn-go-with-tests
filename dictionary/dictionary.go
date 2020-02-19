@@ -3,8 +3,9 @@ package dictionary
 type Dictionary map[string]string
 
 const (
-	ErrNotFound   = DictionaryErr("could not find the word you were looking for")
-	ErrWordExists = DictionaryErr("word already exists")
+	ErrNotFound         = DictionaryErr("could not find the word you were looking for")
+	ErrWordExists       = DictionaryErr("word already exists")
+	ErrWordDoesNotExist = DictionaryErr("word does not exist")
 )
 
 type DictionaryErr string
@@ -28,4 +29,17 @@ func (d Dictionary) Add(word, definition string) error {
 	}
 	d[word] = definition
 	return nil
+}
+
+func (d Dictionary) Update(word, newDefinition string) (err error) {
+	_, exists := d[word]
+	if !exists {
+		err = ErrWordDoesNotExist
+	}
+	d[word] = newDefinition
+	return
+}
+
+func (d Dictionary) Delete(word string) {
+	delete(d, word)
 }
