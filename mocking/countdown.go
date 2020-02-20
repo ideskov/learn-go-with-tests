@@ -3,12 +3,16 @@ package main
 import (
 	"fmt"
 	"io"
+	"os"
 )
 
-func main() {
-
+func Countdown(writer io.Writer) {
+	for i := 3; i > 0; i-- {
+		fmt.Fprintln(writer, i)
+	}
+	_, _ = fmt.Fprint(writer, "Go!")
 }
 
-func Countdown(writer io.Writer) {
-	_, _ = fmt.Fprint(writer, "3")
+func main() {
+	Countdown(os.Stdout)
 }
